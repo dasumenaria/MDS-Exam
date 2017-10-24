@@ -8,11 +8,11 @@ $school_id=$_SESSION['school_id'];
 if(isset($_POST['sub'])){
 	
 	$old_pass=$_POST['old_pass']; 
-	$old_pass1=base64_encode($old_pass);
+	$old_pass1=md5($old_pass);
 	$new_pass=$_POST['new_pass']; 
-	$new_pass1=base64_encode($new_pass);
+	$new_pass1=md5($new_pass);
 	$confirm_pass=$_POST['confirm_pass'];
-	$confirm_pass1=base64_encode($confirm_pass);
+	$confirm_pass1=md5($confirm_pass);
 	
 	@session_start();
 	$user_id=$_SESSION['id'];

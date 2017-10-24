@@ -87,7 +87,7 @@ if($flag=='HELLO'){
 /////mark_3_5?>
           <div class="col-md-offset-3 col-md-9">				    
 			<button type="button" class="btn yellow" id="single" >Single</button>
- 			<a target="_blank" href="others6.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>
+ 			<a target="_blank" href="view_marksheet_secondary_all.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>
 			&exm=<?php echo $exam_name; ?>" <button type="button" class="btn yellow">All</button></a>
  		</div>	
 		 
@@ -153,7 +153,7 @@ if($flag=='HELLO'){
 										<td><?php echo $section_name; ?></td>
 										  
                             <td>
-                            <a target="_blank" href="view_marksheet.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>&exm=<?php echo $exam_name; ?>" class="btn btn-xs yellow">
+                            <a target="_blank" href="view_marksheet_secondary.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>&exm=<?php echo $exam_name; ?>" class="btn btn-xs yellow">
                             View <i class="fa fa-edit"></i>
                             </a>
                             	</td>												 
