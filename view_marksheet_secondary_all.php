@@ -81,7 +81,7 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
    		<?php header_info_Primary($id,$exam_name);?><br>
   
 	<!-- Header End ---> 
-    <table width="100%"  cellspacing="0px" height="300" cellpadding="0px" border="1" id="sample_1">
+    <table width="100%"  cellspacing="0px"  cellpadding="0px" border="1" id="sample_1">
 		<tbody>
 			<tr class="header_font" bgcolor="CCFFCC">
 				<td  height="25px" colspan="100">Part 1 : Scholastic Area</td>
@@ -134,7 +134,7 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
          </tr>
 		 
 		 <!----------MAX--MARKS--START----------->
-		 <tr class="header_font"><th colspan="2">Max Marks</th>
+		 <!--<tr class="header_font" bgcolor="#E0A366"><th colspan="2">Max Marks</th>
 				<?php 
                 $st=mysql_query("select DISTINCT(term_id) from `master_architecture` where `marksheet_term_id`='$term_id' && `class_id`='$class_id' && `section_id`='$section_id'");
                 while($ft=mysql_fetch_array($st))
@@ -179,7 +179,7 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
             <th><?php echo $all_view_max_marks; ?></th>
             <th></th>
 			
-         </tr>
+         </tr>----->
 		 
 		 <!----------MAX--MARKS--END----------->
 		 
@@ -328,6 +328,7 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 									if($reduse=='no'){
 										$TotalGetMarks+=$SubjectMarks;
 										$TotalOneSubject+=$SubjectMarks;
+$TotalOneSubjectMax+=$MainMaxMarks;
 										$OverAllTotalGetMarks+=$SubjectMarks;
 									}else{
 										$dummy_add+=$SubjectMarks;
@@ -343,12 +344,13 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 										$reduse_calculation=(($mark_reduse*$reduce_percentage)/100);
 										$TotalGetMarks+=$reduse_calculation;
 										$TotalOneSubject+=$reduse_calculation;
+$TotalOneSubjectMax+=$TotalOneSubject;
 										$OverAllTotalGetMarks+=$reduse_calculation;
 									}
 								 
 								?>
 								<td>
-									<?php echo $TotalOneSubject;//.'--'.$TotalMaxMarks; ?>
+									<?php echo $TotalOneSubject.'/'.$TotalOneSubjectMax; ?>
 								</td>
 							<?php
 							$forCOl++;;
@@ -367,7 +369,7 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 						?>
                          	<th>
 								<?php 
-								echo round($TotalGetMarks);
+								echo round($TotalGetMarks).'/'.$TotalMaxMarks;
 								?>
 							 </th>
 							 <th>
@@ -703,11 +705,11 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
                     </tr>
                     <tr>
                     	<td  style="text-align:left; padding-left:15px">Date of Issue</td>	
-                        <td ><?php //echo date('d-M-Y'); ?>28-Mar-2017</td>	
+                        <td ><?php echo date('d-M-Y'); ?></td>	
                     </tr>
                     <tr>
                     	<td  style="text-align:left; padding-left:15px">Remarks</td>
-                        <td><input type="text" style="border:0;font-size:15px;text-align:center;" value="<?php echo $status; ?>"></td>	
+                        <td><input type="text" style="border:0;font-size:15px;text-align:center;" value="<?php //echo $status; ?>"></td>	
                     </tr>
 
 		     <tr height="80px">
