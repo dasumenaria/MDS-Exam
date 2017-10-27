@@ -121,10 +121,10 @@ tr{
 								<thead>
 								<!--------------------NEW---CONCEPT------------------------>
 								<tr>
-								<th rowspan='3'>
+								<th rowspan='4'>
 										 Sr.no
 									</th>
-									<th rowspan='3'>
+									<th rowspan='4'>
 										 Name
 									</th>
 								<?php 
@@ -175,10 +175,7 @@ tr{
 
 									</th>
 									 
-									<?php } ?>
-									
-									
-										<?php 
+									<?php } 
 									 
 									$qry1=mysql_query("select `elective`,`sub_subject_id` from `subject_allocation` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='0'");
 									while($frq1=mysql_fetch_array($qry1))
@@ -207,7 +204,7 @@ tr{
 									
 									<th style="text-align:center" colspan="<?php echo $col; ?>">
 										 <?php echo $elec_name; ?>
-										 <?php if(!empty($elec_sub_subject_name)){
+										  <?php if(!empty($elec_sub_subject_name)){
 											 echo '-'.$elec_sub_subject_name;
 										 } ?>
 
@@ -225,31 +222,25 @@ tr{
 									{
 										$sub_id=$frq['subject_id'];
 										$sub_subject_id=$frq['sub_subject_id'];
+										$x=0;
+										$qt=mysql_query("select  DISTINCT(exam_category_id),`exam_category_id` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='$sub_id' && `sub_subject_id`='$sub_subject_id' && `term_id`='$exam_id'");
+										while($fqt=mysql_fetch_array($qt))
+										{
+											//$x++;
+											$exam_category_id=$fqt['exam_category_id'];
+											$qts=mysql_query("select `exam_category_type_id` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='$sub_id' && `sub_subject_id`='$sub_subject_id' && `term_id`='$exam_id' && `exam_category_id`='$exam_category_id'");
+											$count=mysql_num_rows($qts);
+											$slt=mysql_query("select * from `exam_category` where `id`='$exam_category_id'");
+											$flt=mysql_fetch_array($slt);
+											$category_name=$flt['name'];
+											?>
+											<th colspan="<?php echo $count;?>" style="text-align:center">
+											<?php echo $category_name; ?>
+											</th>
+											<?php
+  										}
 										
-								$qt=mysql_query("select `exam_category_type_id` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='$sub_id' && `sub_subject_id`='$sub_subject_id' && `term_id`='$exam_id'");
-									while($fqt=mysql_fetch_array($qt))
-									{
-										$exam_type_id=$fqt['exam_category_type_id'];
-										
-										$query=mysql_query("select * from `exam_category_type` where `id`='$exam_type_id'");
-										$fetc=mysql_fetch_array($query);
-
-										$Exam=$fetc['Exam'];
-										 
-										
-										 
-										?> 
-									<th style="text-align:center">
-										 <?php echo $Exam; ?>
-
-										 
-
-									</th>
-										<?php  }} ?>
-									
-									
-									
-								<?php 
+									} 
 								
 									$qry1=mysql_query("select `elective`,`sub_subject_id` from `subject_allocation` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='0'");
 									while($frq1=mysql_fetch_array($qry1))
@@ -270,12 +261,68 @@ tr{
 										?>
 									 
 									<th style="text-align:center">
-										 <?php echo $Exam; ?>
+										  <?php echo $Exam; ?>
 
 									</th>
 										<?php }}?>
 								
 								</tr>
+								<!---					---->
+								<tr>
+								
+								<?php 
+								
+									$qry=mysql_query("select `subject_id`,`sub_subject_id` from `subject_allocation` where `class_id`='$class_id' && `section_id`='$sect_id' && `elective`='0'");
+									while($frq=mysql_fetch_array($qry))
+									{
+										$sub_id=$frq['subject_id'];
+										$sub_subject_id=$frq['sub_subject_id'];
+										
+										$qt=mysql_query("select `exam_category_type_id` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='$sub_id' && `sub_subject_id`='$sub_subject_id' && `term_id`='$exam_id'");
+										while($fqt=mysql_fetch_array($qt))
+										{
+											$exam_type_id=$fqt['exam_category_type_id'];
+											
+											$query=mysql_query("select * from `exam_category_type` where `id`='$exam_type_id'");
+											$fetc=mysql_fetch_array($query);
+											$Exam=$fetc['Exam'];
+											?> 
+												<th style="text-align:center">
+													<?php echo $Exam; ?>
+												</th>
+											<?php
+										}
+									} 
+							
+								$qry1=mysql_query("select `elective`,`sub_subject_id` from `subject_allocation` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='0'");
+								while($frq1=mysql_fetch_array($qry1))
+								{
+										$elec_id=$frq1['elective'];
+										$sub_subject_id=$frq1['sub_subject_id'];
+										
+									$qt1=mysql_query("select `exam_category_type_id` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='$elec_id' && `sub_subject_id`='$sub_subject_id' && `term_id`='$exam_id'");
+									while($fqt1=mysql_fetch_array($qt1))
+									{
+										  $exam_type_id1=$fqt1['exam_category_type_id'];
+										
+										$query1=mysql_query("select * from `exam_category_type` where `id`='$exam_type_id1'");
+										$fetc1=mysql_fetch_array($query1);
+
+										  $Exam=$fetc1['Exam'];
+										
+										?>
+									 
+										<th style="text-align:center">
+											  <?php echo $Exam; ?>
+
+										</th>
+								<?php }}?>
+								
+								</tr>
+								<!---					---->
+								
+								
+								
 								</thead>
 								<tbody>
 									
