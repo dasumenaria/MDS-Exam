@@ -304,10 +304,11 @@ tr{
 										
 										$sub_name=$ft['subject'];
 										$col=0;
-										$qt=mysql_query("select `exam_category_type_id`,`max_marks` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='$sub_id' && `sub_subject_id`='$sub_subject_id' && `term_id`='$exam_id'");
+										$qt=mysql_query("select `exam_category_type_id`,`max_marks`,`exam_category_id` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='$sub_id' && `sub_subject_id`='$sub_subject_id' && `term_id`='$exam_id'");
 									while($fqt=mysql_fetch_array($qt))
 									{$col++;
 										$exam_type_id=$fqt['exam_category_type_id'];
+										$exam_category_id=$fqt['exam_category_id'];
 										$max_marks=$fqt['max_marks'];
 									  
 										$qst=mysql_query("select `id` from `exam_category_type` where `id`='$exam_type_id'");
@@ -317,7 +318,7 @@ tr{
 										$value_sub=0;
 									
 									
-										$sets1=mysql_query("select `id`,`marks` from `student_marks` where `scholar_no`='$scholar_no' && `term_id`='$exam_id' && `subject_id`='$sub_id' && `sub_subject_id`='$sub_subject_id' && `master_exam_type_id`='$exam_type_id'");
+										$sets1=mysql_query("select `id`,`marks` from `student_marks` where `scholar_no`='$scholar_no' && `term_id`='$exam_id' && `subject_id`='$sub_id' && `sub_subject_id`='$sub_subject_id' && `master_exam_type_id`='$exam_type_id' && `exam_category_id`='$exam_category_id'");
 										$fets1=mysql_fetch_array($sets1);
 										
 										  $value_sub=$fets1['marks'];
@@ -355,9 +356,10 @@ tr{
 										
 										$sub_name=$ft1['subject'];
 										$col=0;
-										$qt=mysql_query("select `exam_category_type_id`,`max_marks` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='$sub_id',`sub_subject_id`='$sub_subject_id' && `term_id`='$exam_id'");
+										$qt=mysql_query("select `exam_category_type_id`,`max_marks`,`exam_category_id` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='$sub_id',`sub_subject_id`='$sub_subject_id' && `term_id`='$exam_id'");
 									while($fqt=mysql_fetch_array($qt))
 									{$col++;
+										$exam_category_id=$fqt['exam_category_id'];
 										$exam_type_id=$fqt['exam_category_type_id'];
 										$max_marks=$fqt['max_marks'];
 										 
@@ -368,7 +370,7 @@ tr{
 									$retrive_type=$fst['id'];
 									$value_sub=0;
 										
-									$query=mysql_query("select `marks`,`id` from `student_marks` where `scholar_no`='$scholar_no' && `term_id`='$exam_id' && `subject_id`='$sub_id' && `sub_subject_id`='$sub_subject_id' && `master_exam_type_id`='$exam_type_id'");
+									$query=mysql_query("select `marks`,`id` from `student_marks` where `scholar_no`='$scholar_no' && `term_id`='$exam_id' && `subject_id`='$sub_id' && `sub_subject_id`='$sub_subject_id' && `master_exam_type_id`='$exam_type_id' && `exam_category_id`='$exam_category_id'");
 									$fetch=mysql_fetch_array($query);
 									
 									 $value_sub=$fetch[$marks];

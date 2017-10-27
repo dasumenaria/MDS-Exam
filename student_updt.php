@@ -24,7 +24,7 @@ if(isset($_POST['sub_up'])){
 	 $scholar=$_POST['scholar'];
 	 $roll=$_POST['roll'];
 	 $address=$_POST['address'];
-	 mysql_query("update `student` SET `dob`='$real_date',`name`='$new_name',`father_name`='$father',`mother_name`='$mother',`class_id`='$class',`section_id`='$section',`scholar_no`='$scholar',`roll_no`='$roll',`address`='$address' where `id`='$user_id'");
+	 mysql_query("update `student` SET `dob`='$real_date',`name`='$new_name',`father_name`='$father',`mother_name`='$mother',`class_id`='$class',`section_id`='$section',`roll_no`='$roll',`address`='$address' where `id`='$user_id'");
 	 
  }
  ?>
