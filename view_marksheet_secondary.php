@@ -120,7 +120,7 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 						{ for($x=0; $x<$countArchitecure; $x++){echo"<td></td>";}}
 						
 					
-					//if($colspan==1){$colspan=0;}
+					 if($find_id==2){continue;}
 					?>
 					<th height="30px"><b><?php echo $category_name; ?></b></th>
 					<?php
@@ -130,57 +130,7 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
             <th>Grade</th>
 			
          </tr>
-		 
-		 <!----------MAX--MARKS--START----------->
-		<!-- <tr class="header_font" bgcolor="#E0A366"><th colspan="2">Max Marks</th>
-				<?php 
-                $st=mysql_query("select DISTINCT(term_id) from `master_architecture` where `marksheet_term_id`='$term_id' && `class_id`='$class_id' && `section_id`='$section_id'");
-                while($ft=mysql_fetch_array($st))
-                {
-                    $heading_term=$ft['term_id'];
-                    $st3=mysql_query("select `name` from `master_term` where `id`='$heading_term'");
-                    $ft3=mysql_fetch_array($st3);
-                    $heading_name=$ft3['name'];
-					$colspan=0;
-					$category_wisecolumn=mysql_query("select * from `master_architecture` where `marksheet_term_id`='$term_id' && `class_id`='$class_id' && `section_id`='$section_id'");
-					while($ftc_categorywise=mysql_fetch_array($category_wisecolumn))
-					{
-						
-						$categoryidd=$ftc_categorywise['category_id'];
-						$tot_max=0;
- 						$st4=mysql_query("select DISTINCT(exam_category_type_id),max_marks,`reduse_to`,`reduse`,`exam_category_id` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$section_id' && `term_id`='$heading_term' && `exam_category_id` = '$categoryidd' ORDER BY `exam_category_id`");
-						$countexam_mapping=mysql_num_rows($st4);
-						if($countexam_mapping>0)
-						{	
-							$f=0;
-							while($ft4=mysql_fetch_array($st4))
-							{	
-								$find_id=$ft4['exam_category_id'];
-								$reduse=$ft4['reduse'];
-								$reduse_to=$ft4['reduse_to'];
-								$view_max_marks=$ft4['max_marks'];
-								$tot_max+=$view_max_marks;
- 							} 	
-						}
-						else
-						{ for($x=0; $x<$countArchitecure; $x++){echo"<td></td>";}}
-						
-					
-					//if($colspan==1){$colspan=0;}
-					?>
-					<th height="30px"><b><?php echo $tot_max; ?></b></th>
-					<?php
-						$all_view_max_marks+=$tot_max;
-
-                } }
-                ?>	
-            <th><?php echo $all_view_max_marks; ?></th>
-            <th></th>
-			
-         </tr>-------->
-		 
-		 <!----------MAX--MARKS--END----------->
-		 
+		  
 		<!--- A Max+
 				L T M Max marks=0 ------------------------> 
          	<?php 
@@ -257,6 +207,8 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 					$TotalMaxMarks=0;
 					$TotalGetMarks=0;
 					$forCOl=0;
+					$x=array();
+					$y=array();
  				//* Architacher Loop
 					$ArchitacherQuery=mysql_query("select DISTINCT(term_id) from `master_architecture` where `marksheet_term_id`='$term_id' && `class_id`='$class_id' && `section_id`='$section_id'");
 					while($ftc_ArchitacherQuery=mysql_fetch_array($ArchitacherQuery))
@@ -282,7 +234,8 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 								$l=0;
 								$reduse_mark=0;
 								$dummy_max_marks=0;
-								//$TotalGetMarks=0;
+								$PTMarks=array();
+								$PTOneMarks=array();
 								while($exam_categoryType_Fetch=mysql_fetch_array($exam_categoryTYpe_query))
 								{
 									
@@ -305,46 +258,62 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 									if($reduse=='no'){
 										$TotalMaxMarks+=$MainMaxMarks;
 										$OverAllTotalMaxMarks+=$MainMaxMarks;
-									}else if(($reduse=='yes')){
-										
-										$l=1;
-										$TotalMaxMarks+=$reduse_to;
-										$OverAllTotalMaxMarks+=$reduse_to;
-									}
-									if($reduse=='yes'){
-										$reduse_mark=$reduse_to;
-									}
+									} 
 									$dummy_max_marks+=$MainMaxMarks;
 									
 									$reduse_calculation=0; 
 									if($reduse=='no'){
 										$TotalGetMarks+=$SubjectMarks;
 										$TotalOneSubject+=$SubjectMarks;
-$TotalOneSubjectMax+=$MainMaxMarks;
+										 
+										$TotalOneSubjectMax+=$MainMaxMarks;
+										 	
 										$OverAllTotalGetMarks+=$SubjectMarks;
 									}else{
 										$dummy_add+=$SubjectMarks;
 									}
 									
-								}
-								 
-								if($reduse=='yes'){
-										$mark_reduse=$dummy_add;
-										$reduse_mark;
-										$dummy_max_marks;
-										$reduce_percentage=(($reduse_mark*100)/$dummy_max_marks);	 
-										$reduse_calculation=(($mark_reduse*$reduce_percentage)/100);
-										$TotalGetMarks+=$reduse_calculation;
-										$TotalOneSubject+=$reduse_calculation;
-$TotalOneSubjectMax+=$reduse_calculation;
-										$OverAllTotalGetMarks+=$reduse_calculation;
+									if($categoryidd==1){
+									$PTMarks[]=$SubjectMarks;
+									$x=$PTMarks;
 									}
-								 
-								?>
-								<td>
-									<?php echo $TotalOneSubject.'/'.$TotalOneSubjectMax; ?>
-								</td>
-							<?php
+									if($categoryidd==2){
+									$PTOneMarks[]=$SubjectMarks;
+									$y=$PTOneMarks;
+									$TM+=$MainMaxMarks;
+									$TotalMaxMarks=$TotalMaxMarks-$MainMaxMarks;
+									}
+									
+								}
+								
+								
+								  
+								if($categoryidd==1 || $categoryidd==2){ continue;}
+								else
+								{
+									?>
+									<td>
+									<?php
+										$totallz=0;
+										for ($xi = 0; $xi < sizeof($x); $xi++) {
+											if ($x[$xi] < $y[$xi]) {
+												 $grater=$y[$xi];
+												 $totallz+=$grater;
+											}
+											if ($x[$xi] >= $y[$xi]) {
+												 $grter=$x[$xi];
+												  $totallz+=$grter;
+											}
+										}
+										echo $totallz.'/'.$TM;
+										 
+										?>
+									</td>
+									<td>
+										<?php echo $TotalOneSubject.'/'.$TotalOneSubjectMax; ?>
+									</td>
+									<?php
+								}
 							$forCOl++;;
 							}
  						}
@@ -384,7 +353,7 @@ $TotalOneSubjectMax+=$reduse_calculation;
 							$GradeQuery=mysql_query("select `grade` from `master_grade` where `class_id`='$class_id' && `section_id`='$section_id' && `range_from`<='$GetOneSubjectPercentage' && `range_to`>='$GetOneSubjectPercentage'");
 							$FtcGradeQuery=mysql_fetch_array($GradeQuery);
 							$grade=$FtcGradeQuery['grade'];
-						?>
+						//exit;?>
  						</tr>
 						<?php
 						$SNo=0;
