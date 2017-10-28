@@ -399,51 +399,46 @@ function header_info_Primary($id,$exam_name)
 		$ftc_schl=mysql_fetch_array($schl);
                 
 	?>
-    <table width="100%" border="0"><br>
-		<tr>
-			<td width="15%">
-				<img width="140" height="160" src="img/cbselogo.png"/>
-			</td>
-				<td width="70%">
-					<div  style="font-size:35px; text-align:center;">
-						<strong style="font-family:revue-bt"><?php echo $ftc_schl['school'];?></strong>
-					 </div>
-					 <div  style="font-size:20px; text-align:center;"> 
-					 <strong><?php echo $ftc_schl['address'];?></br>
-					 <?php echo $ftc_schl['affiliation_no'];?></br>
-					 </strong>
-					 </div>
-					 <div  style="font-size:22px; margin-top:10px; text-align:center;">
-						<strong>Record of Academic Performance<br>
-						Session : ( <?php echo $ses; ?> )</strong>
-					</div>
-				</td>
-				<td width="15%">
-				<img width="140" height="160"src="img/<?php echo $ftc_schl['logo'];?>"/>
-			</td>
-		</tr>
-		 
+	<div style="width:100%;text-align:center; margin-top:10px"> 
+		<img   width="130"  height="130" src="img/<?php echo $ftc_schl['logo'];?>"/>
+	</div>
+	 <table width="70%" border="0" style="margin-left:15%;">
+        <tr>
+             <td>
+              
+            	<div  style="font-size:35px; text-align:center; font-family:Revue;">
+                	<strong style="font-family:revue-bt"><?php echo $ftc_schl['school'];?></strong>
+                 </div>
+ 				 </div>
+            </td>
+        </tr>
+        <tr> 
+        	<td colspan="3" align="center">
+            	<div  style="font-size:22px; margin-top:10px; text-align:center;">
+					<strong>Record of Academic Performance<br>
+					Session : ( <?php echo $ses; ?> )</strong>
+				</div>
+            </td>
+        </tr>
 	</table>
 	<div style="width:100%">
 	<table height="100" style="width:100%;margin-top:20px; margin-left:1px; font-size:14px;font weight:bold" cellpadding="1" border="0" cellspacing="10">
-         
-      
-	  <tr align="left">
+ 	  <tr align="left">
 		<th>Name of Student</th>
-		<th> : &nbsp; <strong ><?php $nm=strtolower($nm); echo ucwords($nm);?></strong> </th>
+		<th> : &nbsp;  <?php $nm=strtolower($nm); echo ucwords($nm);?>  </th>
 		<th style="width:15%">Scholar No.</th>
 		<th style="width:55%" align="left">: &nbsp;<?php  echo $sch;?></th>
  	  </tr>
 	  <tr align="left">
 		<th>Father's Name</th>
-		<th>: &nbsp; <strong ><?php $f_nm=strtolower($f_nm); echo ucwords($f_nm);?></strong></th>
+		<th>: &nbsp; <?php $f_nm=strtolower($f_nm); echo ucwords($f_nm);?> </th>
 		<th>Roll No.</th>
 	    <th> : &nbsp; <?php echo  $rn;?></th>
         
 	  </tr>
 	  <tr align="left">
 		<th>Mother's Name</th>
-		<th> : &nbsp; <strong ><?php $m_nm=strtolower($m_nm); echo ucwords($m_nm);?></strong></th>
+		<th> : &nbsp;  <?php $m_nm=strtolower($m_nm); echo ucwords($m_nm);?> </th>
 		<th>Class </th>
 		<th> : &nbsp; <?php echo ucwords($cls);?></th>
  	  </tr>
