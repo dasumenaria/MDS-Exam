@@ -129,13 +129,13 @@ tr{
 									</th>
 								<?php 
 								
-								$slt=mysql_query("select * from `exam_category` where `id`='$cat_id'");
+								$slt=mysql_query("select * from `master_term` where `id`='$exam_id'");
 								$flt=mysql_fetch_array($slt);
 								
-								$category_name=$flt['name'];
+								$master_term=$flt['name'];
 								?>
 								<th style="text-align:center" colspan="100">
-								<?php echo $category_name; ?>
+								<?php echo $master_term; ?>
 								</th>
 								
 								</tr>

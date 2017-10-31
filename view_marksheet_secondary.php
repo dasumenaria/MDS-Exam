@@ -272,10 +272,18 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 									 
 									
 									if($categoryidd==1){
+										if(($SubjectMarks=='A') || ($SubjectMarks=='T') || ($SubjectMarks=='M') || ($SubjectMarks=='L')){
+										
+										$SubjectMarks=0;
+										}
 									$PTMarks[]=$SubjectMarks;
 									$x=$PTMarks;
 									}
 									if($categoryidd==2){
+										if(($SubjectMarks=='A') || ($SubjectMarks=='T') || ($SubjectMarks=='M') || ($SubjectMarks=='L')){
+										
+										$SubjectMarks=0;
+										}
 									$PTOneMarks[]=$SubjectMarks;
 									$y=$PTOneMarks;
 									$TM+=$MainMaxMarks;
@@ -568,6 +576,30 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 			 */		
 			?>
 			<br>
+			<td> 
+           		<table height="350" width="100%" border="1" cellspacing="0" cellpadding="0" style="text-align:center" >
+                    <tr bgcolor="CCFFCC" class="header_font">
+                    	<th colspan="2" scope="col" height="35" >GRADE KEY </th>
+                    </tr>
+                    <tr style="font-size:16px" bgcolor="#E0A366" class="header_font"  >
+                        <td width="135" style="text-align:center; padding-left:15px" height="35"><strong>Grade</strong></td>
+                        <td width="135"><strong>Ratio</strong></td>
+                    </tr>
+					
+					<tr>
+                        <td style="text-align:center; padding-left:15px"  width="40%">A</td>
+                        <td>50 - 40</td>
+                    </tr>
+					<tr>
+                        <td style="text-align:center; padding-left:15px"  width="40%">B</td>
+                        <td>40 - 30</td>
+                    </tr>
+					<tr>
+                        <td style="text-align:center; padding-left:15px"  width="40%">C</td>
+                        <td>BELOW 30 </td>
+                    </tr>
+            </table>
+           </td>
             <td> 
            		<table height="350" width="100%" border="1" cellspacing="0" cellpadding="0" style="text-align:center" >
                     <tr bgcolor="CCFFCC" class="header_font">
