@@ -274,7 +274,7 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 									if($categoryidd==1){
 										if(($SubjectMarks=='A') || ($SubjectMarks=='T') || ($SubjectMarks=='M') || ($SubjectMarks=='L')){
 										
-										$SubjectMarks=0;
+										//$SubjectMarks=0;
 										}
 									$PTMarks[]=$SubjectMarks;
 									$x=$PTMarks;
@@ -282,35 +282,67 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 									if($categoryidd==2){
 										if(($SubjectMarks=='A') || ($SubjectMarks=='T') || ($SubjectMarks=='M') || ($SubjectMarks=='L')){
 										
-										$SubjectMarks=0;
+										//$SubjectMarks=0;
 										}
 									$PTOneMarks[]=$SubjectMarks;
 									$y=$PTOneMarks;
 									$TM+=$MainMaxMarks;
 									$TotalMaxMarks=$TotalMaxMarks-$MainMaxMarks;
-									}
+ 									}
 									
 								}
  								if($categoryidd==1 || $categoryidd==2){ continue;}
 								else
 								{
+									
 									?>
 									<td>
 									<?php
-										$totallz=0;
+									 
+										$totallz='';
 										for ($xi = 0; $xi < sizeof($x); $xi++) {
-											if ($x[$xi] < $y[$xi]) {
-												 $grater=$y[$xi];
-												 $totallz+=$grater;
+											$result_array=array_diff($x,$y);
+											$result_array1=array_diff($y,$x);
+											if(sizeof($result_array)>0 || sizeof($result_array1)>0)
+											{ 
+												if ($x[$xi] < $y[$xi] && $y[$xi] !='A' && $y[$xi] !='T' && $y[$xi] !='M' && $y[$xi] !='L'){
+													$grater=$y[$xi];
+													$totallz+=$grater;
+												}
+												if ($x[$xi] >= $y[$xi] && $x[$xi] !='A' && $x[$xi] !='T' && $x[$xi] !='M' && $x[$xi] !='L'){
+													$grter=$x[$xi];
+													$totallz+=$grter;
+												}
+												else{
+													$grter=$y[$xi];
+													$totallz+=$grter;
+												}
 											}
-											if ($x[$xi] >= $y[$xi]) {
-												 $grter=$x[$xi];
-												  $totallz+=$grter;
+											else
+											{  
+												$totallz=$x[$xi];								
 											}
 										}
-										echo $totallz.'/'.$TM;
+										
+										if($totallz=='' && $TM==0)
+										{
+											echo "-";  
+										}
+										else if($totallz =='' && $TM>0)
+										{
+											echo '0/'.$TM;
+										}
+										else
+										{
+											echo $totallz.'/'.$TM;
+										}
 										$TotalGetMarks+=$totallz;
 										$TM=0; 
+										/*echo "<pre>";
+										print_r($x);
+										print_r($y);
+										echo "</pre>";
+										exit;*/
 										?>
 									</td>
 									<td>
