@@ -87,8 +87,15 @@ if($flag=='HELLO'){
 /////mark_3_5?>
           <div class="col-md-offset-3 col-md-9">				    
 			<button type="button" class="btn yellow" id="single" >Single</button>
+			<?php if(($class_id=='9') || ($class_id=='10')){ ?>
+			<a target="_blank" href="view_marksheet_secondary_nine_all.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>
+			&exm=<?php echo $exam_name; ?>" <button type="button" class="btn yellow">All</button>
+			</a>
+			<?php }else{ ?>
  			<a target="_blank" href="view_marksheet_secondary_all.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>
-			&exm=<?php echo $exam_name; ?>" <button type="button" class="btn yellow">All</button></a>
+			&exm=<?php echo $exam_name; ?>" <button type="button" class="btn yellow">All</button>
+			</a>
+			<?php } ?>
  		</div>	
 		 
  <?php } if((!empty($class_id)) && (!empty($section_id)) && (!empty($exam_name)) && $flag!='HELLO'){?>
@@ -153,9 +160,15 @@ if($flag=='HELLO'){
 										<td><?php echo $section_name; ?></td>
 										  
                             <td>
-                            <a target="_blank" href="view_marksheet_secondary.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>&exm=<?php echo $exam_name; ?>" class="btn btn-xs yellow">
-                            View <i class="fa fa-edit"></i>
-                            </a>
+							<?php if(($class_id=='9') || ($class_id=='10')){ ?>
+								<a target="_blank" href="view_marksheet_secondary_nine.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>&exm=<?php echo $exam_name; ?>" class="btn btn-xs yellow">
+								View <i class="fa fa-edit"></i>
+								</a>
+							<?php } else{ ?>
+								<a target="_blank" href="view_marksheet_secondary.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>&exm=<?php echo $exam_name; ?>" class="btn btn-xs yellow">
+								View <i class="fa fa-edit"></i>
+								</a>
+							<?php } ?>
                             	</td>												 
 									</tr>
                                     <?php } ?>

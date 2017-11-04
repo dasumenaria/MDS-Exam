@@ -671,7 +671,7 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
                         <td><input type="text" style="border:0;font-size:15px;text-align:center;" value="<?php //echo $status; ?>"></td>	
                     </tr>
 
-		     <tr height="45px">
+		     <tr height="40px">
                         <td style="text-align:center; font-size:18px">Principal<br>( Seal & Signature )</td>
                    		<td>&nbsp;</td>
                     </tr>

@@ -272,77 +272,37 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 									 
 									
 									if($categoryidd==1){
-										if(($SubjectMarks=='A') || ($SubjectMarks=='T') || ($SubjectMarks=='M') || ($SubjectMarks=='L')){
-										
-										//$SubjectMarks=0;
-										}
 									$PTMarks[]=$SubjectMarks;
 									$x=$PTMarks;
 									}
 									if($categoryidd==2){
-										if(($SubjectMarks=='A') || ($SubjectMarks=='T') || ($SubjectMarks=='M') || ($SubjectMarks=='L')){
-										
-										//$SubjectMarks=0;
-										}
 									$PTOneMarks[]=$SubjectMarks;
 									$y=$PTOneMarks;
 									$TM+=$MainMaxMarks;
 									$TotalMaxMarks=$TotalMaxMarks-$MainMaxMarks;
- 									}
+									}
 									
 								}
  								if($categoryidd==1 || $categoryidd==2){ continue;}
 								else
 								{
-									
 									?>
 									<td>
 									<?php
-									 
-										$totallz='';
+										$totallz=0;
 										for ($xi = 0; $xi < sizeof($x); $xi++) {
-											$result_array=array_diff($x,$y);
-											$result_array1=array_diff($y,$x);
-											if(sizeof($result_array)>0 || sizeof($result_array1)>0)
-											{ 
-												if ($x[$xi] < $y[$xi] && $y[$xi] !='A' && $y[$xi] !='T' && $y[$xi] !='M' && $y[$xi] !='L'){
-													$grater=$y[$xi];
-													$totallz+=$grater;
-												}
-												else if ($x[$xi] >= $y[$xi] && $x[$xi] !='A' && $x[$xi] !='T' && $x[$xi] !='M' && $x[$xi] !='L'){
-													$grter=$x[$xi];
-													$totallz+=$grter;
-												}
-												else{
-													$grter=$y[$xi];
-													$totallz+=$grter;
-												}
+											if ($x[$xi] < $y[$xi]) {
+												 $grater=$y[$xi];
+												 $totallz+=$grater;
 											}
-											else
-											{  
-												$totallz=$x[$xi];								
+											if ($x[$xi] >= $y[$xi]) {
+												 $grter=$x[$xi];
+												  $totallz+=$grter;
 											}
 										}
-										
-										if($totallz=='' && $TM==0)
-										{
-											echo "-";  
-										}
-										else if($totallz =='' && $TM>0)
-										{
-											echo '0/'.$TM;
-										}
-										else
-										{
-											echo $totallz.'/'.$TM;
-										}
+										echo $totallz.'/'.$TM;
 										$TotalGetMarks+=$totallz;
 										$TM=0; 
-										/*echo "<pre>";
-										print_r($x);
-										print_r($y);
-										echo "</pre>";
-										*/
 										?>
 									</td>
 									<td>
@@ -607,33 +567,9 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 	mysql_query("insert into `extra` SET `class_id`='$class_id',`section_id`='$section_id',`roll_no`='$Roll',`name`='$name',`status`='$status',`final_status`='$status1',`per`='$per',`total`='$all',`exam_name`='$exam_name'");
 			 */		
 			?>
-			<!--br-->
-			<td> 
-           		<table  width="100%" border="1" cellspacing="0" cellpadding="0" style="text-align:center" >
-                    <tr bgcolor="CCFFCC" class="header_font">
-                    	<th colspan="2" scope="col" height="35px" >GRADE KEY </th>
-                    </tr>
-                    <tr style="font-size:16px" bgcolor="#E0A366" class="header_font"  >
-                        <td width="135" style="text-align:center; padding-left:15px" height="35px"><strong>Grade</strong></td>
-                        <td width="135"><strong>Ratio</strong></td>
-                    </tr>
-					
-					<tr>
-                        <td style="text-align:center; padding-left:15px"  height="58px" width="40%">A</td>
-                        <td>50 - 40</td>
-                    </tr>
-					<tr>
-                        <td style="text-align:center; padding-left:15px"  height="58px" width="40%">B</td>
-                        <td>40 - 30</td>
-                    </tr>
-					<tr>
-                        <td style="text-align:center; padding-left:15px"  height="58px" width="40%">C</td>
-                        <td>BELOW 30 </td>
-                    </tr>
-            </table>
-           </td>
+			<br>
             <td> 
-           		<table width="100%" border="1" cellspacing="0" cellpadding="0" style="text-align:center" >
+           		<table height="350" width="100%" border="1" cellspacing="0" cellpadding="0" style="text-align:center" >
                     <tr bgcolor="CCFFCC" class="header_font">
                     	<th colspan="2" scope="col" height="35" >Session Report (Signature)</th>
                     </tr>
@@ -650,28 +586,28 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 				$show_attendance=$attendance.'/'.$max_attendance;
 					?>
 					<tr>
-                        <td style="text-align:left; padding-left:15px"  height="25px">Attendance</td>
+                        <td style="text-align:left; padding-left:15px"  width="40%">Attendance</td>
                         <td>&nbsp;<?php echo $show_attendance; ?></td>
                     </tr>
                      
                     <tr>
-                        <td style="text-align:left; padding-left:15px"  height="25px">Class Teacher</td>
+                        <td style="text-align:left; padding-left:15px">Class Teacher</td>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
-                        <td style="text-align:left; padding-left:15px" height="25px">Parent</td>
+                        <td style="text-align:left; padding-left:15px">Parent</td>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
-                    	<td  style="text-align:left; padding-left:15px" height="25px">Date of Issue</td>	
+                    	<td  style="text-align:left; padding-left:15px">Date of Issue</td>	
                         <td ><?php echo date('d-M-Y'); ?></td>	
                     </tr>
                     <tr>
-                    	<td  style="text-align:left; padding-left:15px" height="25px">Remarks</td>
+                    	<td  style="text-align:left; padding-left:15px">Remarks</td>
                         <td><input type="text" style="border:0;font-size:15px;text-align:center;" value="<?php //echo $status; ?>"></td>	
                     </tr>
 
-		     <tr height="45px">
+		     <tr height="80px">
                         <td style="text-align:center; font-size:18px">Principal<br>( Seal & Signature )</td>
                    		<td>&nbsp;</td>
                     </tr>

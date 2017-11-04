@@ -12,7 +12,7 @@ $cat=$_POST['cat_id'];
  
   	echo "<script>
     location='number_view.php';
-    window.open('number_edit.php?cls=$class_id&sec=$section_id&exm=$exam_id&cat=$cat','_newtab');
+    window.open('number_edit.php?cls=$class_id&sec=$section_id&exm=$exam_id','_newtab');
     </script>";  
 	
 }
@@ -97,7 +97,7 @@ $cat=$_POST['cat_id'];
 							<div class="col-md-4">
 							   <div class="input-icon right">
 									<i class="fa"></i>
-									<select class="form-control user2" required name="exm">
+									<select class="form-control" required name="exm">
 									<option value="">---Select Term---</option>
 								    <?php
 									$query2=mysql_query("select * from `master_term` order by `id`");

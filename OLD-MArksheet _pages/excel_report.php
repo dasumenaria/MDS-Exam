@@ -21,7 +21,8 @@ header("Cache-Control: post-check=0, pre-check=0", true);
  
                   	<!-- BEGIN BORDERED TABLE PORTLET-->
 					<table  style="border-color:#FFF;"id="table"  width="100%" border="1">
-					<thead>
+					
+								<thead>
 								<!--------------------NEW---CONCEPT------------------------>
 								<tr>
 								<th rowspan='4'>
@@ -151,22 +152,23 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 										$elec_id=$frq1['elective'];
 										$sub_subject_id=$frq1['sub_subject_id'];
 										
-								$qt=mysql_query("select  DISTINCT(exam_category_id),`exam_category_id` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='$elec_id' && `sub_subject_id`='$sub_subject_id' && `term_id`='$exam_id'");
-										while($fqt=mysql_fetch_array($qt))
-										{
-											//$x++;
-											$exam_category_id=$fqt['exam_category_id'];
-											$qts=mysql_query("select `exam_category_type_id` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='$elec_id' && `sub_subject_id`='$sub_subject_id' && `term_id`='$exam_id' && `exam_category_id`='$exam_category_id'");
-											$count=mysql_num_rows($qts);
-											$slt=mysql_query("select * from `exam_category` where `id`='$exam_category_id'");
-											$flt=mysql_fetch_array($slt);
-											$category_name=$flt['name'];
-											?>
-											<th colspan="<?php echo $count;?>" style="text-align:center">
-											<?php echo $category_name; ?>
-											</th>
-											<?php
-  										}}?>
+								$qt1=mysql_query("select `exam_category_type_id` from `exam_mapping` where `class_id`='$class_id' && `section_id`='$sect_id' && `subject_id`='$elec_id' && `sub_subject_id`='$sub_subject_id' && `term_id`='$exam_id'");
+									while($fqt1=mysql_fetch_array($qt1))
+									{
+										  $exam_type_id1=$fqt1['exam_category_type_id'];
+										
+										$query1=mysql_query("select * from `exam_category_type` where `id`='$exam_type_id1'");
+										$fetc1=mysql_fetch_array($query1);
+
+										  $Exam=$fetc1['Exam'];
+										
+										?>
+									 
+									<th style="text-align:center">
+										  <?php echo $Exam; ?>
+
+									</th>
+										<?php }}?>
 								
 								</tr>
 								<!---					---->
@@ -227,7 +229,6 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 								
 								</thead>
 								<tbody>
-							
 									
 								<?php 
 								$w=0;
@@ -284,7 +285,7 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 
 										<?php } } ?>
 										
-			<?php	///////////////////////////////////////ELECTIVE	./////////////////////	?>
+			<?php	///////////////////////////////////////ELECTIVE	./////////////////////	?>				
 										
 										
 										
@@ -317,20 +318,18 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 									$retrive_type=$fst['id'];
 									$value_sub=0;
 										
-									$sets1=mysql_query("select `id`,`marks` from `student_marks` where `scholar_no`='$scholar_no' && `term_id`='$exam_id' && `subject_id`='$sub_id' && `master_exam_type_id`='$exam_type_id' && `exam_category_id`='$exam_category_id'");
-										$fets1=mysql_fetch_array($sets1);
-										
-										  $value_sub=$fets1['marks'];
-										
-									 
-										 
-										
-									 
+									$query=mysql_query("select `marks`,`id` from `student_marks` where `scholar_no`='$scholar_no' && `term_id`='$exam_id' && `subject_id`='$sub_id' && `master_exam_type_id`='$exam_type_id' && `exam_category_id`='$exam_category_id'");
+									$fetch=mysql_fetch_array($query);
+									
+									 $value_sub=$fetch[$marks];
 									?>
 									
-								<td style="text-align:center">
-									<?php echo $value_sub; ?> 
-								</td>
+									<td style="text-align:center">
+									<?php if($count>0){ ?>
+										  <?php echo $value_sub; ?> 
+										<?php } else { ?> <?php } ?>
+									</td>
+									 
 										<?php } }?></tr><?php }?>
 										
 									 
