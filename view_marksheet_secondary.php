@@ -366,7 +366,7 @@ $CuttentStatust=mysql_query("select `roman` from `master_class` where `id`='$cla
 						?>
                          	<th>
 								<?php 
-								echo $TotalGetMarks.'/'.$TotalMaxMarks;
+								echo round($TotalGetMarks).'/'.$TotalMaxMarks;
 								?>
 							 </th>
                          <?php

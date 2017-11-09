@@ -85,13 +85,17 @@ include("database.php");
    
 if($flag=='HELLO'){
 /////mark_3_5?>
-          <div class="col-md-offset-3 col-md-9">				    
+          <div class="col-md-offset-3 col-md-9">
 			<button type="button" class="btn yellow" id="single" >Single</button>
 			<?php if(($class_id=='9') || ($class_id=='10')){ ?>
 			<a target="_blank" href="view_marksheet_secondary_nine_all.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>
 			&exm=<?php echo $exam_name; ?>" <button type="button" class="btn yellow">All</button>
 			</a>
-			<?php }else{ ?>
+			<?php }else if(($class_id=='11') || ($class_id=='12')){ ?>
+			<a target="_blank" href="view_senior_all.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>
+			&exm=<?php echo $exam_name; ?>" <button type="button" class="btn yellow">All</button>
+			</a>
+			<?php } else{ ?>
  			<a target="_blank" href="view_marksheet_secondary_all.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>
 			&exm=<?php echo $exam_name; ?>" <button type="button" class="btn yellow">All</button>
 			</a>
@@ -164,7 +168,11 @@ if($flag=='HELLO'){
 								<a target="_blank" href="view_marksheet_secondary_nine.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>&exm=<?php echo $exam_name; ?>" class="btn btn-xs yellow">
 								View <i class="fa fa-edit"></i>
 								</a>
-							<?php } else{ ?>
+							<?php } else if(($class_id=='11') || ($class_id=='12')){ ?>
+								<a target="_blank" href="view_senior.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>&exm=<?php echo $exam_name; ?>" class="btn btn-xs yellow">
+								View <i class="fa fa-edit"></i>
+								</a>
+							<?php }else{ ?>
 								<a target="_blank" href="view_marksheet_secondary.php?sch=<?php echo $scholar_no; ?>&cls=<?php echo $class_id; ?>&sec=<?php echo $section_id; ?>&exm=<?php echo $exam_name; ?>" class="btn btn-xs yellow">
 								View <i class="fa fa-edit"></i>
 								</a>
